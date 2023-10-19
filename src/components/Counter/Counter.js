@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { increment, decrement } from '../../store/slices/counterSlice';
+import { increment, decrement, setStep } from '../../store/slices/counterSlice';
 
 const Counter = (props) => {
     const { count, step, dispatch} = props;
@@ -13,7 +13,11 @@ const Counter = (props) => {
             <button onClick={() => dispatch(decrement())}>Decrement</button>
             <label>
                 Step:
-                <input type='number' value={step}/>
+                <input 
+                    type='number' 
+                    value={step}
+                    onChange={({target: {value}}) => dispatch(setStep(value))}
+                />
             </label>
             
         </div>
