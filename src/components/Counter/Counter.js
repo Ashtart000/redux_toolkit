@@ -11,6 +11,11 @@ const Counter = (props) => {
             <p>Step: {step}</p>
             <button onClick={() => dispatch(increment())}>Increment</button>
             <button onClick={() => dispatch(decrement())}>Decrement</button>
+            <label>
+                Step:
+                <input type='number' value={step}/>
+            </label>
+            
         </div>
     );
 }
