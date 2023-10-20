@@ -1,13 +1,3 @@
-@use '../../common/styles/template';
-
-.darkTheme {
-    @extend %darkTheme;
-}
-
-.lightTheme {
-    @extend %lightTheme;
-}
-
 .counter {
     padding: 20px;
 }

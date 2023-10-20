@@ -1,23 +1,22 @@
 import React from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
-import cx from 'classnames';
 import CONSTANTS from '../../constants';
 import { setTheme } from '../../store/slices/themeSlice';
+import { setLang } from '../../store/slices/langSlice';
 import styles from './Header.module.scss';
+import { translations } from '../../utils/translations';
+import HomePage from '../../pages/HomePage';
 
-const { THEMES } = CONSTANTS;
+const { LANGUAGE } = CONSTANTS;
 
-const Header = (props) => {
-    const theme = useSelector((state) => state.theme);
+const Header = () => {
+    const language = useSelector((state) => state.lang);
     const dispatch = useDispatch();
 
-    const className = cx(styles.header, {
-        [styles.darkTheme]: theme === THEMES.DARK,
-        [styles.lightTheme]: theme === THEMES.LIGHT
-    })
+    const { toogleText } = translations.get(language);
 
     return (
-        <header className={className}>
+        <header className={styles.header}>
             <nav>
                 <h1>My Site</h1>
                 <ul>
@@ -27,7 +26,14 @@ const Header = (props) => {
                 </ul>
             </nav>
             <div>
-                <button onClick={() => dispatch(setTheme())}>Switch theme</button>
+            <select value={language} onChange={({target: {value}}) => dispatch(setLang(value))}>
+                {Object.values(LANGUAGE).map((langObj, index) => (
+                    <option key={index} value={langObj.VALUE}>{langObj.OPTION_TEXT}</option>
+                ))}
+            </select>
+            </div>
+            <div>
+                <button onClick={() => dispatch(setTheme())}>{toogleText}</button>
             </div>
         </header>
     );

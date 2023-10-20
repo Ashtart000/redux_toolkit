@@ -10,7 +10,7 @@ const CONSTANTS = {
         },
         DE_DE: {
             VALUE: 'DE_DE',
-            OPTION_TEXT: 'DE'
+            OPTION_TEXT: 'Deutsch'
         }
     },
     THEMES: {
