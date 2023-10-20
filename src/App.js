@@ -1,12 +1,15 @@
-import Counter from './components/Counter/Counter';
-import Header from './components/Header/Header';
+import CounterPage from "./pages/CounterPage";
+import { Switch, Route } from 'react-router-dom';
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Counter />
-    </>
+    <Switch>
+      <Route exact path='/' component={HomePage} />
+      <Route path='/counter' component={CounterPage}/>
+      <Route path='*' component={NotFoundPage} />
+    </Switch>
   );
 }
 
