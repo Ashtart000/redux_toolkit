@@ -1,11 +1,11 @@
+@use '../../common/styles/template';
+
 .darkTheme {
-    background-color: teal;
-    color: white;
+    @extend %darkTheme;
 }
 
 .lightTheme {
-    background-color: rgb(203, 247, 247);
-    color: black;
+    @extend %lightTheme;
 }
 
 .counter {

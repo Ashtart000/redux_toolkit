@@ -1,3 +1,5 @@
+@use '../../common/styles/template';
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -25,11 +27,9 @@
 }
 
 .darkTheme {
-    background-color: teal;
-    color: white;
+    @extend %darkTheme;
 }
 
 .lightTheme {
-    background-color: rgb(203, 247, 247);
-    color: black;
+    @extend %lightTheme;
 }

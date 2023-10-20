@@ -1,0 +1,15 @@
+$darkBg: teal;
+$darkColor: white;
+$lightBg: beige;
+$lightColor: rgb(1, 87, 87);
+
+
+%darkTheme {
+    background-color: $darkBg;
+    color: $darkColor;
+}
+
+%lightTheme {
+    background-color: $lightBg;
+    color: $lightColor;
+}
