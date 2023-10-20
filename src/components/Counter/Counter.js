@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import { increment, decrement, setStep } from '../../store/slices/counterSlice';
 import { setLang } from '../../store/slices/langSlice';
 import CONSTANTS from '../../constants';
+import styles from './Counter.module.scss'
 
-const { LANGUAGE: { EN_US, UA_UA, DE_DE} } = CONSTANTS;
+const { LANGUAGE, LANGUAGE: { EN_US, UA_UA, DE_DE}, THEMES } = CONSTANTS;
 
 const translations = new Map([
     [
-        EN_US,
+        EN_US.VALUE,
         {
             countText: 'Count',
             stepText: 'Step',
@@ -17,7 +19,7 @@ const translations = new Map([
         }
     ],
     [
-        UA_UA,
+        UA_UA.VALUE,
         {
             countText: 'Стан лічильника',
             stepText: 'Крок',
@@ -28,16 +30,24 @@ const translations = new Map([
 ])
 
 const Counter = (props) => {
-    const { count, step, incrementCb, decrementCb, setStepCb, language, setLangCb } = props;
+    const { count, step, incrementCb, decrementCb, setStepCb, language, setLangCb, theme } = props;
 
     const tranclation = translations.get(language);
     const { countText, stepText, incrementText, decrementText} = tranclation;
 
+    const className = cx(styles.counter, {
+        [styles.darkTheme]: theme === THEMES.DARK,
+        [styles.lightTheme]: theme === THEMES.LIGHT
+    })
+
     return (
-        <div>
+        <div className={className}>
             <select value={language} onChange={setLangCb}>
-                <option value={EN_US}>English</option>
-                <option value={UA_UA}>Українська</option>
+                {/* <option value={EN_US.VALUE}>{EN_US.OPTION_TEXT}</option>
+                <option value={UA_UA.VALUE}>{UA_UA.OPTION_TEXT}</option> */}
+                {Object.values(LANGUAGE).map((langObj, index) => (
+                    <option key='index' value={langObj.VALUE}>{langObj.OPTION_TEXT}</option>
+                ))}
             </select>
             <br/>
 
@@ -61,7 +71,8 @@ const Counter = (props) => {
 function mapStateToProps(state) {
     return {
         ...state.counter,
-        language: state.lang
+        language: state.lang,
+        theme: state.theme
     };
 }
 

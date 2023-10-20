@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    // background-color: teal;
+    // color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
+
+        li {
+            margin: 10px;
+        }
+    }
+}
+
+.darkTheme {
+    background-color: teal;
+    color: white;
+}
+
+.lightTheme {
+    background-color: rgb(203, 247, 247);
+    color: black;
+}
