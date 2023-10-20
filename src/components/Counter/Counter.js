@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import cx from 'classnames';
 import { increment, decrement, setStep } from '../../store/slices/counterSlice';
 import { setLang } from '../../store/slices/langSlice';
@@ -30,7 +30,13 @@ const translations = new Map([
 ])
 
 const Counter = (props) => {
-    const { count, step, incrementCb, decrementCb, setStepCb, language, setLangCb, theme } = props;
+    // const { count, step, incrementCb, decrementCb, setStepCb, language, setLangCb, theme } = props;
+
+    const language = useSelector((state) => state.lang);
+    const theme = useSelector((state) => state.theme);
+    const { count, step } = useSelector((state) => state.counter);
+
+    const dispatch = useDispatch();
 
     const tranclation = translations.get(language);
     const { countText, stepText, incrementText, decrementText} = tranclation;
@@ -42,7 +48,7 @@ const Counter = (props) => {
 
     return (
         <div className={className}>
-            <select value={language} onChange={setLangCb}>
+            <select value={language} onChange={({target: {value}}) => dispatch(setLang(value))}>
                 {/* <option value={EN_US.VALUE}>{EN_US.OPTION_TEXT}</option>
                 <option value={UA_UA.VALUE}>{UA_UA.OPTION_TEXT}</option> */}
                 {Object.values(LANGUAGE).map((langObj, index) => (
@@ -53,14 +59,14 @@ const Counter = (props) => {
 
             <p>{countText}: {count}</p>
             <p>{stepText}: {step}</p>
-            <button onClick={incrementCb}>{incrementText}</button>
-            <button onClick={decrementCb}>{decrementText}</button>
+            <button onClick={() => dispatch(increment())}>{incrementText}</button>
+            <button onClick={() => dispatch(decrement())}>{decrementText}</button>
             <label>
                 {stepText}:
                 <input 
                     type='number' 
                     value={step}
-                    onChange={setStepCb}
+                    onChange={({target: {value}}) => dispatch(setStep(value))}
                 />
             </label>
             
@@ -68,22 +74,22 @@ const Counter = (props) => {
     );
 }
 
-function mapStateToProps(state) {
-    return {
-        ...state.counter,
-        language: state.lang,
-        theme: state.theme
-    };
-}
+// function mapStateToProps(state) {
+//     return {
+//         ...state.counter,
+//         language: state.lang,
+//         theme: state.theme
+//     };
+// }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        incrementCb: () => dispatch(increment()),
-        decrementCb: () => dispatch(decrement()),
-        setStepCb: ({target: {value}}) => dispatch(setStep(value)),
-        setLangCb: ({target: {value}}) => dispatch(setLang(value))
-    }
-}
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         incrementCb: () => dispatch(increment()),
+//         decrementCb: () => dispatch(decrement()),
+//         setStepCb: ({target: {value}}) => dispatch(setStep(value)),
+//         setLangCb: ({target: {value}}) => dispatch(setLang(value))
+//     }
+// }
 
 // const mapDispatchToProps = {
 //     increment,
@@ -95,4 +101,4 @@ function mapDispatchToProps(dispatch) {
 
 // const counterWithState = withState(Counter);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default Counter;
