@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cx from 'classnames';
-import { increment, decrement, setStep } from '../../store/slices/counterSlice';
-import { setLang } from '../../store/slices/langSlice';
+import * as counterActionCreators from '../../store/slices/counterSlice';
+import * as langActionCreators from '../../store/slices/langSlice';
 import CONSTANTS from '../../constants';
 import styles from './Counter.module.scss'
+import { bindActionCreators } from '@reduxjs/toolkit';
 
 const { LANGUAGE, LANGUAGE: { EN_US, UA_UA, DE_DE}, THEMES } = CONSTANTS;
 
@@ -38,6 +39,12 @@ const Counter = (props) => {
 
     const dispatch = useDispatch();
 
+    const actionCreators = bindActionCreators(
+        {...counterActionCreators, ...langActionCreators}, 
+        dispatch
+    );
+    const { setLang, setStep, increment, decrement } = actionCreators;
+
     const tranclation = translations.get(language);
     const { countText, stepText, incrementText, decrementText} = tranclation;
 
@@ -48,25 +55,25 @@ const Counter = (props) => {
 
     return (
         <div className={className}>
-            <select value={language} onChange={({target: {value}}) => dispatch(setLang(value))}>
+            <select value={language} onChange={({target: {value}}) => setLang(value)}>
                 {/* <option value={EN_US.VALUE}>{EN_US.OPTION_TEXT}</option>
                 <option value={UA_UA.VALUE}>{UA_UA.OPTION_TEXT}</option> */}
                 {Object.values(LANGUAGE).map((langObj, index) => (
-                    <option key='index' value={langObj.VALUE}>{langObj.OPTION_TEXT}</option>
+                    <option key={index} value={langObj.VALUE}>{langObj.OPTION_TEXT}</option>
                 ))}
             </select>
             <br/>
 
             <p>{countText}: {count}</p>
             <p>{stepText}: {step}</p>
-            <button onClick={() => dispatch(increment())}>{incrementText}</button>
-            <button onClick={() => dispatch(decrement())}>{decrementText}</button>
+            <button onClick={() => increment()}>{incrementText}</button>
+            <button onClick={() => decrement()}>{decrementText}</button>
             <label>
                 {stepText}:
                 <input 
                     type='number' 
                     value={step}
-                    onChange={({target: {value}}) => dispatch(setStep(value))}
+                    onChange={({target: {value}}) => setStep(value)}
                 />
             </label>
             
