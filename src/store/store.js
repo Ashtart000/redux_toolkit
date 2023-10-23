@@ -1,13 +1,15 @@
 import {configureStore} from '@reduxjs/toolkit';
 import counterReducer from './slices/counterSlice';
 import langReducer from './slices/langSlice';
-import themeSlice from './slices/themeSlice';
+import themeReducer from './slices/themeSlice';
+import usersReducer from './slices/usersSlice';
 
 const store = configureStore({
     reducer: {
         counter: counterReducer,
         lang: langReducer,
-        theme: themeSlice
+        theme: themeReducer,
+        users: usersReducer
     }
 });
 

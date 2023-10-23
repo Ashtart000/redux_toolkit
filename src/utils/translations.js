@@ -10,7 +10,8 @@ export const translations = new Map([
             stepText: 'Step',
             incrementText: 'Increment',
             decrementText: 'Decrement',
-            toogleText: 'Switch theme'
+            toogleText: 'Switch theme',
+            headerText: 'My Site'
         }
     ],
     [
@@ -20,7 +21,8 @@ export const translations = new Map([
             stepText: 'Крок',
             incrementText: 'Збільшити',
             decrementText: 'Зменшити',
-            toogleText: 'Переключити тему'
+            toogleText: 'Переключити тему',
+            headerText: 'Мій Сайт'
         }
     ], 
     [
@@ -30,7 +32,8 @@ export const translations = new Map([
             stepText: 'Schritt',
             incrementText: 'Zunehmen',
             decrementText: 'Abnehmen',
-            toogleText: 'Thema wechseln'
+            toogleText: 'Thema wechseln',
+            headerText: 'Meine Seite'
         }
     ]
 ])

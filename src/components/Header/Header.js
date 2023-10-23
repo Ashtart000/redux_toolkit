@@ -5,7 +5,6 @@ import { setTheme } from '../../store/slices/themeSlice';
 import { setLang } from '../../store/slices/langSlice';
 import styles from './Header.module.scss';
 import { translations } from '../../utils/translations';
-import HomePage from '../../pages/HomePage';
 
 const { LANGUAGE } = CONSTANTS;
 
@@ -13,12 +12,12 @@ const Header = () => {
     const language = useSelector((state) => state.lang);
     const dispatch = useDispatch();
 
-    const { toogleText } = translations.get(language);
+    const { toogleText, headerText } = translations.get(language);
 
     return (
         <header className={styles.header}>
             <nav>
-                <h1>My Site</h1>
+                <h1>{headerText}</h1>
                 <ul>
                     <li>Link 1</li>
                     <li>Link 2</li>

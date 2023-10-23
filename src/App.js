@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import cx from 'classnames';
 import CONSTANTS from './constants';
 import styles from './components/Header/Header.module.scss';
+import UsersPage from "pages/UsersPage";
 
 const { THEMES } = CONSTANTS;
 
@@ -22,6 +23,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/counter' component={CounterPage}/>
+        <Route path='/users' component={UsersPage}/>
         <Route path='*' component={NotFoundPage} />
       </Switch>
     </div>
